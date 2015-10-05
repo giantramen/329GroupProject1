@@ -16,6 +16,7 @@ public class ReboundPanel extends JPanel
    private ImageIcon image;
    private Timer timer;
    private int x, y, moveX, moveY;
+   private String dumbField;
 
    //-----------------------------------------------------------------
    //  Sets up the panel, including the timer for the animation.
@@ -42,6 +43,11 @@ public class ReboundPanel extends JPanel
    {
       super.paintComponent(page);
       image.paintIcon(this, page, x, y);
+   }
+   
+   public void dumbMethod()
+   {
+	char c = 'c';
    }
 
    //*****************************************************************
