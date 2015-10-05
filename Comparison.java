@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import javax.tools.JavaCompiler;
@@ -14,15 +15,17 @@ import javax.tools.ToolProvider;
 
 public class Comparison {
 
+	
+	
 	public static void main(String[] args) throws ClassNotFoundException, MalformedURLException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter full path to newest file");
 		//String newFile = input.next();
-		String newFile = "C:\\Users\\gtkamin\\Modified\\ReboundPanel.java";
+		String newFile = "C:\\Users\\Grant Kamin\\Downloads\\Comparison\\Modified\\ReboundPanel.java";
 		System.out.println("Enter full path to old file");
-		//String oldFile = input.next();
-		String oldFile = "C:\\Users\\gtkamin\\ReboundPanel.java";
-		System.setProperty("java.home", "C:\\Program Files (x86)\\Java\\jdk1.8.0_45");
+		//String oldFile = input.next();	//TODO: remove hardcoded paths to files
+		String oldFile = "C:\\Users\\Grant Kamin\\Downloads\\Comparison\\ReboundPanel.java";
+		System.setProperty("java.home", "C:\\Program Files (x86)\\Java\\jdk1.7.0_55");  //TODO: add scanner for jdk
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		int firstCompilationResult =	compiler.run(System.in, System.out, System.err, newFile);
 		if(firstCompilationResult == 0){
@@ -61,6 +64,7 @@ public class Comparison {
 	}
 	
 	public static String AddMethod(Class newClass, Class oldClass){
+		//TODO: Fill this out
 		return "";
 	}
 	
@@ -77,6 +81,8 @@ public class Comparison {
 	}
 	
 	public static String ChangeMethod(Class newClass, Class oldClass){
+		//TODO: Fill this out
+
 		return "";
 	}
 	
@@ -99,22 +105,40 @@ public class Comparison {
 	}
 	
 	public static String DeleteField(Class newClass, Class oldClass){
+		//TODO: Fill this out
+
 		return "";
 	}
 	
 	public static String ChangeFieldInit(Class newClass, Class oldClass){
-		Field[] newFields = newClass.getFields();
-		Field[] oldFields = oldClass.getFields();
+		Field[] newFields = newClass.getDeclaredFields();
+		Field[] oldFields = oldClass.getDeclaredFields();
 		try{
-		Constructor<?> ctor = newClass.getConstructor(String.class);
-		Object newObject = ctor.newInstance(new Object[] {});
-		Object oldObject = oldClass.newInstance();
+		Constructor<?> ctor = newClass.getConstructor();
+		Object newObject = ctor.newInstance();
+		ctor = oldClass.getConstructor();
+		Object oldObject = ctor.newInstance();
 		String resultString = "";
 		List<Field> oldList = Arrays.asList(oldFields);
 		for (Field field : newFields){
-			if (oldList.contains(field)){
-				Field oldField = oldList.get(oldList.indexOf(field));
-				if (!oldField.get(oldObject).equals(field.get(newObject))){
+			if (oldList.stream().filter(o -> o.getName().equals(field.getName())).findFirst().isPresent()){
+				Field oldField = oldList.stream().filter(o -> o.getName().equals(field.getName())).findFirst().get();
+				if (oldField.getModifiers() != field.getModifiers()){
+					resultString += "Changed field accessability " + field.getName() + "\n";
+				}
+				if (!oldField.isAccessible()){
+					oldField.setAccessible(true);
+				}
+				if (!field.isAccessible()){
+					field.setAccessible(true);
+				}
+				if (oldField.get(oldObject) == null && field.get(newObject) != null){
+					resultString += "Added field initializer " + field.getName() + "\n";
+				}
+				else if (oldField.get(oldObject) != null && field.get(newObject) == null){
+					resultString += "Deleted field initializer " + field.getName() + "\n";
+				}
+				else if (!oldField.get(oldObject).equals(field.get(newObject))){
 					resultString += "Changed field initializer " + field.getName() + "\n";
 				}
 			}
