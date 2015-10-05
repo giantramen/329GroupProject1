@@ -1,3 +1,15 @@
 //-----------------------------------------------------------------
-//  Draws the image in the current location.
+//  Michael Snook
+//  Grant Kamin
+//  CPR E 329
+//  
 //-----------------------------------------------------------------
+Requirements:
+Must be run on Windows and in the eclipse IDE.
+Require Java Developer Kit version 1.8 to be installed in following directory:
+C:\Program Files (x86)\Java\jdk1.8.*
+
+Instructions:
+1) Import Comparison.java into a new, empty eclipse project.
+2) Ensure your Java Runtime Environment System Library is JavaSE-1.8 (jdk1.8.*)
+IMPORTANT: Comparison will NOT work if using an old execution environment!

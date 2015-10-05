@@ -28,6 +28,14 @@ public class ReboundPanel extends JPanel
       super.paintComponent(page);
       image.paintIcon(this, page, x, y);
    }
+   
+   public void changedMethod()
+   {
+	char c = 'd';
+	if(1 == 1){
+		//Do Nothing
+	}
+   }
 
    //-----------------------------------------------------------------
    //  Sets up the panel, including the timer for the animation.

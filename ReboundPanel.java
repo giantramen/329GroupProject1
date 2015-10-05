@@ -49,6 +49,14 @@ public class ReboundPanel extends JPanel
    {
 	char c = 'c';
    }
+   
+   public void changedMethod()
+   {
+	char c = 'c';
+	if(1 == 1){
+		//Do Nothing
+	}
+   }
 
    //*****************************************************************
    //  Represents the action listener for the timer.
