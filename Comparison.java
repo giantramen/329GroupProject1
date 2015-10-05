@@ -27,26 +27,6 @@ public class Comparison {
 		System.out.println("Enter full path to old file:");
 		String oldFile = input.next();
 		String javaDir = "C:\\Program Files (x86)\\Java\\";
-		File javaFile = new File(javaDir);
-		String[] dirContents = javaFile.list();
-		boolean javaPathFound = false;
-		for(String f : dirContents){
-			if(new File(javaDir+f).isDirectory()){
-				//requires jdk version 1.8.
-				if(f.contains("jdk1.8")){
-					javaDir += f;
-					System.setProperty("java.home", javaDir);
-					javaPathFound = true;
-					break;
-				}
-			}
-		}
-		if(!javaPathFound){
-			System.out.println("Error: Could not locate Java Developer Kit 1.8 in " + javaDir 
-					+ "\nPlease install in that directory from and try again: \n" + 
-					"http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-windows-i586.exe");
-			System.exit(0);
-		}
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		int firstCompilationResult = compiler.run(System.in, System.out, System.err, newFile);
 		if(firstCompilationResult == 0){
