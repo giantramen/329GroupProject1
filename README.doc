@@ -11,5 +11,19 @@ C:\Program Files (x86)\Java\jdk1.8.*
 
 Instructions:
 1) Import Comparison.java into a new, empty eclipse project.
+2) Ensure package name of Comparison matches or is amended to match the project package.
 2) Ensure your Java Runtime Environment System Library is JavaSE-1.8 (jdk1.8.*)
 IMPORTANT: Comparison will NOT work if using an old execution environment!
+If unavailable, please download from and install from below link:
+http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-windows-i586.exe
+3) Once enviroment is set up, click "Run" or the green play button to execute the main method inside Comparison.java
+4) You will be prompted to enter the abolute path of the newer and then the older file. 
+IMPORTANT: File path/names CANNOT contain space characters
+5) After entering files to compare, Comparison will provide the following information:
+
+AM: Methods added to the newer file
+DM: Methods deleted from old file
+CM: Methods changed from old file to new file (even if comments are changed within the method body!)
+AF: Filed added to the newer file
+DF: Fields deleted from old file
+CFI: Changed Field Initializers
